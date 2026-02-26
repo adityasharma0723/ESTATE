@@ -46,6 +46,11 @@ app.use('/api/chat', require('./routes/chat'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/admin', require('./routes/admin'));
 
+// Root route
+app.get('/', (req, res) => {
+    res.json({ status: 'OK', message: 'EstateX API is live! Visit /api/health for status.' });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'EstateX API is running' });
