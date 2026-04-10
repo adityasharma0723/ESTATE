@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode (toggles via .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --font-sans: 'Inter', sans-serif;
   --color-primary: #6366f1;

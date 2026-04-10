@@ -28,7 +28,7 @@ const Hero = () => {
                     alt="Modern luxury home"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/70 to-dark/40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/75 to-white/40 dark:from-dark/90 dark:via-dark/70 dark:to-dark/40" />
             </div>
 
             {/* Floating shapes */}
@@ -38,12 +38,12 @@ const Hero = () => {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                 <div className="max-w-2xl">
                     {/* Badge */}
-                    <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in">
+                    <div className="inline-flex items-center space-x-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in">
                         <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-sm text-white/80">Over 10,000+ properties listed</span>
+                        <span className="text-sm text-gray-700 dark:text-white/80">Over 10,000+ properties listed</span>
                     </div>
 
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight animate-slide-up">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight animate-slide-up">
                         Find Your{' '}
                         <span className="bg-gradient-to-r from-primary-light to-secondary bg-clip-text text-transparent">
                             Dream Home
@@ -51,14 +51,14 @@ const Hero = () => {
                         , Effortlessly
                     </h1>
 
-                    <p className="mt-6 text-lg text-gray-300 max-w-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                    <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
                         Discover premium properties, connect with verified agents, and make your real estate journey seamless with EstateX.
                     </p>
 
                     {/* Search card */}
                     <form
                         onSubmit={handleSearch}
-                        className="mt-10 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-4 animate-slide-up"
+                        className="mt-10 bg-gray-100/70 dark:bg-white/10 backdrop-blur-xl rounded-2xl border border-gray-300 dark:border-white/20 p-4 animate-slide-up"
                         style={{ animationDelay: '0.2s' }}
                     >
                         {/* Toggle */}
@@ -70,7 +70,7 @@ const Hero = () => {
                                     onClick={() => setSearchData({ ...searchData, status })}
                                     className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${searchData.status === status
                                             ? 'bg-primary text-white'
-                                            : 'bg-white/10 text-white/70 hover:bg-white/20'
+                                            : 'bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-white/70 hover:bg-gray-300 dark:hover:bg-white/20'
                                         }`}
                                 >
                                     {status}
@@ -80,20 +80,20 @@ const Hero = () => {
 
                         <div className="flex flex-col sm:flex-row gap-3">
                             <div className="relative flex-1">
-                                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-white/40" />
                                 <input
                                     type="text"
                                     placeholder="Enter city or location"
                                     value={searchData.city}
                                     onChange={(e) => setSearchData({ ...searchData, city: e.target.value })}
-                                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-xl focus:outline-none focus:border-primary"
+                                    className="w-full pl-10 pr-4 py-3 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 rounded-xl focus:outline-none focus:border-primary"
                                 />
                             </div>
 
                             <select
                                 value={searchData.propertyType}
                                 onChange={(e) => setSearchData({ ...searchData, propertyType: e.target.value })}
-                                className="px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl focus:outline-none focus:border-primary appearance-none"
+                                className="px-4 py-3 bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 text-gray-900 dark:text-white rounded-xl focus:outline-none focus:border-primary appearance-none"
                             >
                                 <option value="" className="text-gray-900">All Types</option>
                                 <option value="Apartment" className="text-gray-900">Apartment</option>
@@ -123,8 +123,8 @@ const Hero = () => {
                             { value: '500+', label: 'Agents' },
                         ].map((stat) => (
                             <div key={stat.label} className="text-center sm:text-left">
-                                <p className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</p>
-                                <p className="text-xs sm:text-sm text-gray-400 mt-1">{stat.label}</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">{stat.label}</p>
                             </div>
                         ))}
                     </div>

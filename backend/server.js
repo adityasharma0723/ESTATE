@@ -18,6 +18,7 @@ const server = http.createServer(app);
 
 // Init Socket.io
 const io = initSocket(server);
+app.set('io', io);
 
 // Body parser
 app.use(express.json({ limit: '10mb' }));
@@ -27,9 +28,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // CORS
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173').split(',').map(s => s.trim());
 app.use(
     cors({
-        origin: process.env.CLIENT_URL || 'http://localhost:5173',
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         credentials: true,
     })
 );
@@ -61,8 +69,11 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-    console.log(`🚀 EstateX server running on port ${PORT}`);
-});
+// Only listen when not running on Vercel (serverless)
+if (!process.env.VERCEL) {
+    server.listen(PORT, () => {
+        console.log(`🚀 EstateX server running on port ${PORT}`);
+    });
+}
 
-module.exports = { app, server, io };
+module.exports = app;

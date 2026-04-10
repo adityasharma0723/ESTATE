@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPropertyById, clearCurrent } from '../../store/slices/propertySlice';
 import { formatPrice, formatDate } from '../../utils/helpers';
-import { HiLocationMarker, HiHeart, HiPhone, HiMail, HiShare, HiScale, HiStar } from 'react-icons/hi';
+import { HiLocationMarker, HiHeart, HiPhone, HiMail, HiShare, HiScale, HiStar, HiChat } from 'react-icons/hi';
 import { IoBedOutline, IoWaterOutline, IoResizeOutline } from 'react-icons/io5';
 import API from '../../api/axios';
 import toast from 'react-hot-toast';
@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 const PropertyDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { current: property, loading } = useSelector((state) => state.properties);
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const [activeImg, setActiveImg] = useState(0);
@@ -275,6 +276,21 @@ const PropertyDetails = () => {
                                         </a>
                                     )}
                                 </div>
+                                {isAuthenticated && property.agent._id !== user?._id && (
+                                    <button
+                                        onClick={async () => {
+                                            try {
+                                                const { data } = await API.post(`/chat/${property._id}`, { agentId: property.agent._id });
+                                                navigate('/chat', { state: { activeChatId: data.chat._id } });
+                                            } catch (err) {
+                                                toast.error('Failed to start chat');
+                                            }
+                                        }}
+                                        className="mt-4 w-full flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-colors"
+                                    >
+                                        <HiChat className="w-5 h-5" /> Chat with Agent
+                                    </button>
+                                )}
                             </div>
                         )}
 
