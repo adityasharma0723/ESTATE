@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const getStripe = () => require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Property = require('../models/Property');
 
 // @desc    Create Stripe checkout session for featuring a property
@@ -14,7 +14,7 @@ exports.createCheckoutSession = async (req, res, next) => {
             return res.status(403).json({ message: 'Not authorized' });
         }
 
-        const session = await stripe.checkout.sessions.create({
+        const session = await getStripe().checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
                 {
@@ -50,7 +50,7 @@ exports.handleWebhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
 
     try {
-        const event = stripe.webhooks.constructEvent(
+        const event = getStripe().webhooks.constructEvent(
             req.body,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET

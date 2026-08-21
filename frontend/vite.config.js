@@ -13,4 +13,19 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          charts: ['recharts'],
+          maps: ['leaflet', 'react-leaflet'],
+          stripe: ['@stripe/stripe-js'],
+          socket: ['socket.io-client'],
+        },
+      },
+    },
+  },
 });
+
