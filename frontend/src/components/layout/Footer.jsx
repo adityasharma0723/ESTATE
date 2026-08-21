@@ -5,28 +5,6 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 const Footer = () => {
     return (
         <footer className="bg-gray-900 dark:bg-dark text-gray-300">
-            {/* Newsletter */}
-            <div className="bg-gradient-to-r from-primary to-secondary">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div>
-                            <h3 className="text-2xl font-bold text-white">Stay Updated</h3>
-                            <p className="text-white/80 mt-1">Get the latest property listings delivered to your inbox.</p>
-                        </div>
-                        <div className="flex w-full md:w-auto">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 md:w-80 px-5 py-3 rounded-l-xl bg-white/20 backdrop-blur text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
-                            />
-                            <button className="px-6 py-3 bg-white text-primary font-semibold rounded-r-xl hover:bg-gray-100 transition-colors">
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {/* Main footer */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
