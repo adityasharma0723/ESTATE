@@ -69,6 +69,15 @@ const PropertyDetails = () => {
         }
     };
 
+    const handleShare = () => {
+        navigator.clipboard.writeText(window.location.href);
+        toast.success('Link copied to clipboard!');
+    };
+
+    const handleCompare = () => {
+        toast.success('Added to compare list!');
+    };
+
     if (loading || !property) {
         return (
             <div className="min-h-screen bg-gray-50 dark:bg-dark pt-20">
@@ -172,10 +181,10 @@ const PropertyDetails = () => {
                                 <button onClick={handleSave} className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-xl text-sm font-medium hover:bg-red-100 transition-colors">
                                     <HiHeart className="w-4 h-4" /> Save
                                 </button>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-400 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
+                                <button onClick={handleShare} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-400 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
                                     <HiShare className="w-4 h-4" /> Share
                                 </button>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-xl text-sm font-medium hover:bg-primary/20 transition-colors">
+                                <button onClick={handleCompare} className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-xl text-sm font-medium hover:bg-primary/20 transition-colors">
                                     <HiScale className="w-4 h-4" /> Compare
                                 </button>
                             </div>
