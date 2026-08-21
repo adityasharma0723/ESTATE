@@ -63,6 +63,7 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center space-x-3">
                         <button
                             onClick={() => dispatch(toggleDarkMode())}
+                            title="Toggle dark mode"
                             className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
                             aria-label="Toggle dark mode"
                         >
@@ -73,12 +74,14 @@ const Navbar = () => {
                             <>
                                 <Link
                                     to="/saved"
+                                    title="View saved properties"
                                     className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
                                 >
                                     <HiHeart className="w-5 h-5" />
                                 </Link>
                                 <Link
                                     to="/chat"
+                                    title="View messages"
                                     className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
                                 >
                                     <HiChat className="w-5 h-5" />
@@ -86,6 +89,7 @@ const Navbar = () => {
                                 <div className="relative">
                                     <button
                                         onClick={() => setProfileOpen(!profileOpen)}
+                                        title="Profile menu"
                                         className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
                                     >
                                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-sm font-semibold">

@@ -24,12 +24,14 @@ const CTASection = () => {
                         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link
                                 to="/register"
+                                title="Create a free agent account"
                                 className="px-8 py-3.5 bg-white text-primary font-semibold rounded-xl hover:bg-gray-100 transition-colors shadow-xl flex items-center gap-2"
                             >
                                 Get Started Free <HiArrowRight className="w-5 h-5" />
                             </Link>
                             <Link
                                 to="/about"
+                                title="Learn more about our platform"
                                 className="px-8 py-3.5 bg-white/10 backdrop-blur text-white font-semibold rounded-xl border border-white/30 hover:bg-white/20 transition-colors"
                             >
                                 Learn More

@@ -68,6 +68,7 @@ const Hero = () => {
                                     key={status}
                                     type="button"
                                     onClick={() => setSearchData({ ...searchData, status })}
+                                    title={`Show properties ${status}`}
                                     className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${searchData.status === status
                                             ? 'bg-primary text-white'
                                             : 'bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-white/70 hover:bg-gray-300 dark:hover:bg-white/20'
@@ -106,6 +107,7 @@ const Hero = () => {
 
                             <button
                                 type="submit"
+                                title="Search for properties"
                                 className="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
                             >
                                 <HiSearch className="w-5 h-5" />

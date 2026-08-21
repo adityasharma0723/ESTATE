@@ -51,6 +51,7 @@ const PropertyCard = ({ property, onSaveToggle }) => {
     return (
         <Link
             to={`/properties/${property._id}`}
+            title={`View details for ${property.title}`}
             className="group block bg-white dark:bg-dark-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-border hover:border-primary/30"
         >
             {/* Image */}
@@ -79,6 +80,7 @@ const PropertyCard = ({ property, onSaveToggle }) => {
                 <div className="absolute top-3 right-3 flex gap-2">
                     <button
                         onClick={handleSave}
+                        title={saved ? 'Remove from saved' : 'Save property'}
                         className={`p-2 rounded-full backdrop-blur-sm transition-colors ${saved ? 'bg-red-500 text-white' : 'bg-white/20 text-white hover:bg-white/40'
                             }`}
                     >
@@ -86,6 +88,7 @@ const PropertyCard = ({ property, onSaveToggle }) => {
                     </button>
                     <button
                         onClick={handleCompare}
+                        title={isInCompare ? 'Remove from comparison' : 'Add to comparison'}
                         className={`p-2 rounded-full backdrop-blur-sm transition-colors ${isInCompare ? 'bg-primary text-white' : 'bg-white/20 text-white hover:bg-white/40'
                             }`}
                     >
