@@ -153,7 +153,7 @@ exports.contactUs = async (req, res, next) => {
         }
 
         await sendEmail({
-            email: process.env.SMTP_USER, // sends to YOUR inbox
+            email: process.env.CONTACT_EMAIL || process.env.SMTP_USER, // your personal inbox
             subject: `EstateX Contact: ${subject}`,
             html: `
                 <h2>New Contact Form Submission</h2>
