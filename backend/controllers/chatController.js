@@ -144,9 +144,64 @@ exports.aiAssistant = async (req, res, next) => {
 
         // Extract search criteria from user message
         const cityPatterns = {
-            'mumbai': 'Mumbai', 'delhi': 'Delhi', 'bangalore': 'Bangalore', 'bengaluru': 'Bangalore',
-            'hyderabad': 'Hyderabad', 'pune': 'Pune', 'chennai': 'Chennai', 'kolkata': 'Kolkata',
-            'jaipur': 'Jaipur', 'ahmedabad': 'Ahmedabad', 'lucknow': 'Lucknow', 'chandigarh': 'Chandigarh', 'goa': 'Goa',
+            // Metro cities
+            'mumbai': 'Mumbai', 'bombay': 'Mumbai',
+            'delhi': 'Delhi', 'new delhi': 'Delhi',
+            'bangalore': 'Bangalore', 'bengaluru': 'Bangalore',
+            'hyderabad': 'Hyderabad',
+            'pune': 'Pune',
+            'chennai': 'Chennai', 'madras': 'Chennai',
+            'kolkata': 'Kolkata', 'calcutta': 'Kolkata',
+            'ahmedabad': 'Ahmedabad',
+            // Punjab / North India
+            'jalandhar': 'Jalandhar',
+            'amritsar': 'Amritsar',
+            'ludhiana': 'Ludhiana',
+            'chandigarh': 'Chandigarh',
+            'patiala': 'Patiala',
+            'mohali': 'Mohali',
+            'pathankot': 'Pathankot',
+            // Rajasthan
+            'jaipur': 'Jaipur',
+            'jodhpur': 'Jodhpur',
+            'udaipur': 'Udaipur',
+            'kota': 'Kota',
+            'ajmer': 'Ajmer',
+            // UP / NCR
+            'noida': 'Noida',
+            'gurgaon': 'Gurgaon', 'gurugram': 'Gurgaon',
+            'lucknow': 'Lucknow',
+            'agra': 'Agra',
+            'varanasi': 'Varanasi',
+            'kanpur': 'Kanpur',
+            'ghaziabad': 'Ghaziabad',
+            'meerut': 'Meerut',
+            'allahabad': 'Prayagraj', 'prayagraj': 'Prayagraj',
+            // Other major cities
+            'goa': 'Goa', 'panaji': 'Goa',
+            'surat': 'Surat',
+            'vadodara': 'Vadodara', 'baroda': 'Vadodara',
+            'nagpur': 'Nagpur',
+            'indore': 'Indore',
+            'bhopal': 'Bhopal',
+            'coimbatore': 'Coimbatore',
+            'kochi': 'Kochi', 'cochin': 'Kochi',
+            'thiruvananthapuram': 'Thiruvananthapuram',
+            'bhubaneswar': 'Bhubaneswar',
+            'patna': 'Patna',
+            'ranchi': 'Ranchi',
+            'raipur': 'Raipur',
+            'dehradun': 'Dehradun',
+            'shimla': 'Shimla',
+            'manali': 'Manali',
+            'mysore': 'Mysore', 'mysuru': 'Mysore',
+            'mangalore': 'Mangalore',
+            'visakhapatnam': 'Visakhapatnam', 'vizag': 'Visakhapatnam',
+            'vijayawada': 'Vijayawada',
+            'nashik': 'Nashik',
+            'aurangabad': 'Aurangabad',
+            'thane': 'Thane',
+            'navi mumbai': 'Navi Mumbai',
         };
         const typePatterns = {
             'apartment': 'Apartment', 'flat': 'Apartment', 'villa': 'Villa', 'house': 'House',
@@ -160,7 +215,7 @@ exports.aiAssistant = async (req, res, next) => {
         let detectedStatus = null;
         let maxBudget = null;
 
-        // Detect city
+        // Detect city — hardcoded map first
         for (const [pattern, city] of Object.entries(cityPatterns)) {
             if (msg.includes(pattern)) { detectedCity = city; break; }
         }
@@ -187,7 +242,7 @@ exports.aiAssistant = async (req, res, next) => {
         if (needsSearch) {
             // Build query
             const query = { isApproved: true };
-            if (detectedCity) query.city = detectedCity;
+            if (detectedCity) query.city = { $regex: detectedCity, $options: 'i' };
             if (detectedType) query.propertyType = detectedType;
             if (detectedBedrooms) query.bedrooms = { $gte: detectedBedrooms };
             if (detectedStatus) query.status = detectedStatus;
@@ -217,7 +272,7 @@ exports.aiAssistant = async (req, res, next) => {
 
                 reply = `Great news! 🎉 I found ${properties.length} propert${properties.length > 1 ? 'ies' : 'y'} matching your criteria${filters.length ? ' (' + filters.join(', ') + ')' : ''}:\n\n${listings}\n\nWould you like more details about any of these? I can also help you narrow down by budget, bedrooms, or area.`;
             } else {
-                reply = `I searched our database but couldn't find properties matching all your criteria. Try broadening your search — for example, remove the budget filter or try a different city. Here are our most popular cities: Mumbai, Delhi, Bangalore, Pune, Hyderabad, Chennai, Jaipur, and Goa.`;
+                reply = `I searched our database but couldn't find properties matching all your criteria${detectedCity ? ` in ${detectedCity}` : ''}. This could mean no listings have been added there yet. Try a nearby city or broaden your filters.\n\nWe currently have listings in: Mumbai, Delhi, Bangalore, Pune, Hyderabad, Chennai, Kolkata, Jaipur, Chandigarh, Jalandhar, Amritsar, Ludhiana, Noida, Gurgaon, Goa, and more.`;
             }
         }
         // Greetings
