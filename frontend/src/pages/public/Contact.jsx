@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HiMail, HiPhone, HiLocationMarker, HiChat, HiClock, HiShieldCheck } from 'react-icons/hi';
 import toast from 'react-hot-toast';
+import API from '../../api/axios';
 
 const Contact = () => {
     const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
@@ -8,12 +9,22 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!form.name || !form.email || !form.subject || !form.message) {
+            toast.error('Please fill in all fields.');
+            return;
+        }
         setSending(true);
-        await new Promise(r => setTimeout(r, 800));
-        toast.success('Message sent! We\'ll get back to you within 24 hours.');
-        setForm({ name: '', email: '', subject: '', message: '' });
-        setSending(false);
+        try {
+            await API.post('/auth/contact', form);
+            toast.success("Message sent! We'll get back to you within 24 hours.");
+            setForm({ name: '', email: '', subject: '', message: '' });
+        } catch (err) {
+            toast.error(err.response?.data?.message || 'Failed to send message. Please try again.');
+        } finally {
+            setSending(false);
+        }
     };
+
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-dark pt-20">

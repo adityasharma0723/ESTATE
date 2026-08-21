@@ -143,3 +143,32 @@ exports.resetPassword = async (req, res, next) => {
         next(error);
     }
 };
+// @desc    Contact form — sends email to admin inbox
+// @route   POST /api/auth/contact
+exports.contactUs = async (req, res, next) => {
+    try {
+        const { name, email, subject, message } = req.body;
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
+        await sendEmail({
+            email: process.env.SMTP_USER, // sends to YOUR inbox
+            subject: `EstateX Contact: ${subject}`,
+            html: `
+                <h2>New Contact Form Submission</h2>
+                <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse;">
+                    <tr><td style="padding:8px;font-weight:bold;">Name:</td><td style="padding:8px;">${name}</td></tr>
+                    <tr><td style="padding:8px;font-weight:bold;">Email:</td><td style="padding:8px;"><a href="mailto:${email}">${email}</a></td></tr>
+                    <tr><td style="padding:8px;font-weight:bold;">Subject:</td><td style="padding:8px;">${subject}</td></tr>
+                    <tr><td style="padding:8px;font-weight:bold;">Message:</td><td style="padding:8px;">${message}</td></tr>
+                </table>
+                <p style="color:#888;font-size:12px;margin-top:16px;">Reply directly to <a href="mailto:${email}">${email}</a> to respond.</p>
+            `,
+        });
+
+        res.json({ success: true, message: 'Message received. We will get back to you shortly.' });
+    } catch (error) {
+        next(error);
+    }
+};
