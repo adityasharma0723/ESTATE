@@ -4,12 +4,13 @@ const sendEmail = async (options) => {
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: parseInt(process.env.SMTP_PORT) || 587,
-        secure: false,         // true for 465, false for 587 (STARTTLS)
-        requireTLS: true,
+        secure: false,
         auth: {
             user: process.env.SMTP_USER,
-            pass: (process.env.SMTP_PASS || '').replace(/\s/g, ''), // strip spaces from app password
+            pass: (process.env.SMTP_PASS || '').replace(/\s/g, ''),
         },
+        connectionTimeout: 10000,  // 10s max to connect
+        socketTimeout: 10000,      // 10s max to send
         tls: {
             rejectUnauthorized: false,
         },
