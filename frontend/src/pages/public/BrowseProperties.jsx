@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProperties, setFilters, resetFilters } from '../../store/slices/propertySlice';
+import { fetchProperties, setFilters, resetFilters, addPropertyRealTime, updatePropertyRealTime, removePropertyRealTime } from '../../store/slices/propertySlice';
 import PropertyCard from '../../components/property/PropertyCard';
 import { HiAdjustments, HiX, HiSearch, HiHome, HiLocationMarker, HiShieldCheck } from 'react-icons/hi';
+import { io } from 'socket.io-client';
 
 const BrowseProperties = () => {
     const dispatch = useDispatch();
@@ -47,6 +48,29 @@ const BrowseProperties = () => {
     };
 
     const activeFilterCount = Object.values(filters).filter(v => v && v !== 'newest').length;
+
+    // Real-time socket events
+    useEffect(() => {
+        const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
+
+        socket.on('property_added', (property) => {
+            dispatch(addPropertyRealTime(property));
+        });
+
+        socket.on('property_updated', (property) => {
+            dispatch(updatePropertyRealTime(property));
+        });
+
+        socket.on('property_deleted', (propertyId) => {
+            dispatch(removePropertyRealTime(propertyId));
+        });
+
+        socket.on('property_approved', (property) => {
+            dispatch(updatePropertyRealTime(property));
+        });
+
+        return () => socket.disconnect();
+    }, [dispatch]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-dark pt-20">

@@ -78,6 +78,29 @@ const propertySlice = createSlice({
         clearCurrent: (state) => {
             state.current = null;
         },
+        addPropertyRealTime: (state, action) => {
+            if (action.payload.isApproved) {
+                state.properties.unshift(action.payload);
+            }
+        },
+        updatePropertyRealTime: (state, action) => {
+            const index = state.properties.findIndex(p => p._id === action.payload._id);
+            if (index !== -1) {
+                if (action.payload.isApproved === false) {
+                    state.properties.splice(index, 1);
+                } else {
+                    state.properties[index] = action.payload;
+                }
+            } else if (action.payload.isApproved) {
+                state.properties.unshift(action.payload);
+            }
+            if (state.current && state.current._id === action.payload._id) {
+                state.current = action.payload;
+            }
+        },
+        removePropertyRealTime: (state, action) => {
+            state.properties = state.properties.filter(p => p._id !== action.payload);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -111,5 +134,5 @@ const propertySlice = createSlice({
     },
 });
 
-export const { setFilters, resetFilters, clearCurrent } = propertySlice.actions;
+export const { setFilters, resetFilters, clearCurrent, addPropertyRealTime, updatePropertyRealTime, removePropertyRealTime } = propertySlice.actions;
 export default propertySlice.reducer;

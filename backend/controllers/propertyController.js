@@ -111,6 +111,13 @@ exports.createProperty = async (req, res, next) => {
         }
 
         const property = await Property.create(req.body);
+        await property.populate('agent', 'name email avatar phone');
+
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('property_added', property);
+        }
+
         res.status(201).json({ success: true, property });
     } catch (error) {
         next(error);
@@ -161,7 +168,12 @@ exports.updateProperty = async (req, res, next) => {
         property = await Property.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
-        });
+        }).populate('agent', 'name email avatar phone');
+
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('property_updated', property);
+        }
 
         res.json({ success: true, property });
     } catch (error) {
@@ -184,6 +196,12 @@ exports.deleteProperty = async (req, res, next) => {
         }
 
         await Property.findByIdAndDelete(req.params.id);
+
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('property_deleted', req.params.id);
+        }
+
         res.json({ success: true, message: 'Property deleted' });
     } catch (error) {
         next(error);
@@ -198,8 +216,14 @@ exports.approveProperty = async (req, res, next) => {
             req.params.id,
             { isApproved: req.body.isApproved },
             { new: true }
-        );
+        ).populate('agent', 'name email avatar phone');
         if (!property) return res.status(404).json({ message: 'Property not found' });
+
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('property_approved', property);
+        }
+
         res.json({ success: true, property });
     } catch (error) {
         next(error);

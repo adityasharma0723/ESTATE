@@ -10,6 +10,7 @@
 ## 📋 Table of Contents
 
 - [About](#about)
+- [Problem, Solution & Impact](#-problem-solution--impact)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -25,6 +26,18 @@
 ## 🏗 About
 
 **EstateX** is a premium real estate platform built with the MERN stack. It supports three distinct user roles — **User**, **Agent**, and **Admin** — each with a dedicated dashboard. Users can browse and save properties, submit inquiries, and leave reviews. Agents can list and manage properties with analytics. Admins have full control over users, properties, blogs, and reviews.
+
+---
+
+## 🎯 Problem, Solution & Impact
+
+EstateX solves the fragmentation and trust gap in real estate discovery by unifying search, verified agent communication, and secure payments into one role-based platform.
+
+| Stakeholder | Problem | Solution (EstateX Feature) | Impact |
+|---|---|---|---|
+| **🏠 Buyers / Renters** | Listings scattered across brokers, WhatsApp groups, and outdated classifieds. No real filtering. No record of agent conversations. | Advanced search & filters (location, price, type, bedrooms) + interactive Leaflet map view + Socket.io real-time chat with persistent history | A single trustworthy place to search, compare, and message agents directly — no more juggling ten disconnected channels |
+| **🏢 Agents** | No centralized tool to manage listings. No visibility into performance. Leads lost across calls, texts, and walk-ins. | Agent dashboard with full property CRUD, structured inquiry pipeline, and Recharts-powered listing analytics | A free, lightweight CRM — manage listings, capture leads, and track what's converting, all in one place |
+| **🛡 Admins / Platform Operators** | No way to moderate listing quality, fake agents, or unmoderated reviews. No platform-wide visibility. | Admin dashboard with RBAC-backed control over users, properties, blogs, and reviews + platform-wide analytics | Real moderation power to keep the marketplace clean, which keeps buyers and agents confident in using the platform |
 
 ---
 
