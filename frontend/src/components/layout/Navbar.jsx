@@ -33,10 +33,10 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <div className="w-9 h-9 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">E</span>
+                        <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
+                            <span className="font-serif text-white font-bold text-lg">E</span>
                         </div>
-                        <span className="text-xl font-bold text-gray-900 dark:text-white">
+                        <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
                             Estate<span className="text-primary">X</span>
                         </span>
                     </Link>
@@ -92,7 +92,7 @@ const Navbar = () => {
                                         title="Profile menu"
                                         className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
                                     >
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-sm font-semibold">
+                                        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white text-sm font-semibold">
                                             {user?.name?.charAt(0)?.toUpperCase()}
                                         </div>
                                     </button>

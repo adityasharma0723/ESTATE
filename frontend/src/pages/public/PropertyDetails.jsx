@@ -178,13 +178,13 @@ const PropertyDetails = () => {
 
                             {/* Actions */}
                             <div className="flex gap-3 mt-4">
-                                <button onClick={handleSave} className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-xl text-sm font-medium hover:bg-red-100 transition-colors">
+                                <button onClick={handleSave} title="Save property to your profile" className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-xl text-sm font-medium hover:bg-red-100 transition-colors">
                                     <HiHeart className="w-4 h-4" /> Save
                                 </button>
-                                <button onClick={handleShare} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-400 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
+                                <button onClick={handleShare} title="Copy property link to share" className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-400 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
                                     <HiShare className="w-4 h-4" /> Share
                                 </button>
-                                <button onClick={handleCompare} className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-xl text-sm font-medium hover:bg-primary/20 transition-colors">
+                                <button onClick={handleCompare} title="Add property to comparison list" className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-xl text-sm font-medium hover:bg-primary/20 transition-colors">
                                     <HiScale className="w-4 h-4" /> Compare
                                 </button>
                             </div>
@@ -252,7 +252,7 @@ const PropertyDetails = () => {
                                     <textarea value={reviewForm.comment} onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
                                         placeholder="Share your experience..." rows={3}
                                         className="w-full p-3 bg-gray-50 dark:bg-dark border border-gray-200 dark:border-dark-border rounded-xl text-sm focus:outline-none focus:border-primary" />
-                                    <button type="submit" className="mt-3 px-6 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark">
+                                    <button type="submit" title="Submit your review" className="mt-3 px-6 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark">
                                         Submit Review
                                     </button>
                                 </form>
@@ -295,6 +295,7 @@ const PropertyDetails = () => {
                                                 toast.error('Failed to start chat');
                                             }
                                         }}
+                                        title="Start a real-time chat with this agent"
                                         className="mt-4 w-full flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-colors"
                                     >
                                         <HiChat className="w-5 h-5" /> Chat with Agent
@@ -313,7 +314,7 @@ const PropertyDetails = () => {
                                 <textarea placeholder="I'm interested in this property..." value={inquiry.message}
                                     onChange={(e) => setInquiry({ ...inquiry, message: e.target.value })} rows={4}
                                     className="w-full p-3 bg-gray-50 dark:bg-dark border border-gray-200 dark:border-dark-border rounded-xl text-sm focus:outline-none focus:border-primary" required />
-                                <button type="submit" className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-colors">
+                                <button type="submit" title="Send your inquiry to the agent" className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-colors">
                                     Send Inquiry
                                 </button>
                             </form>

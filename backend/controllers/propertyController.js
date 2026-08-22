@@ -14,7 +14,7 @@ exports.getProperties = async (req, res, next) => {
         const filter = { isApproved: true };
 
         // Filters
-        if (req.query.city) filter.city = { $regex: req.query.city, $options: 'i' };
+        if (req.query.city) filter.city = { $regex: `^${req.query.city.trim()}$`, $options: 'i' };
         if (req.query.state) filter.state = { $regex: req.query.state, $options: 'i' };
         if (req.query.propertyType) filter.propertyType = req.query.propertyType;
         if (req.query.status) filter.status = req.query.status;

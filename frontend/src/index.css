@@ -4,13 +4,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --font-sans: 'Inter', sans-serif;
-  --color-primary: #6366f1;
-  --color-primary-dark: #4f46e5;
-  --color-primary-light: #818cf8;
-  --color-secondary: #0ea5e9;
-  --color-accent: #f59e0b;
-  --color-success: #10b981;
-  --color-danger: #ef4444;
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'DM Mono', monospace;
+  
+  --color-base-bg: #FAF8F5;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+  
+  --color-primary: #B5651D;
+  --color-primary-dark: #965318;
+  --color-primary-light: #d1823a;
+  
+  --color-secondary: #2F4F3F;
+  --color-accent: #B5651D; /* Fallback for existing accent classes */
+  
+  --color-border-light: #E8E4DD;
+  --color-error: #C4453A;
+  --color-danger: #C4453A; /* Fallback for existing danger classes */
+  --color-success: #2F4F3F; /* Secondary acts as success */
+  
   --color-dark: #0f172a;
   --color-dark-card: #1e293b;
   --color-dark-border: #334155;
@@ -20,6 +33,8 @@
 /* Base styles */
 body {
   font-family: 'Inter', sans-serif;
+  background-color: var(--color-base-bg);
+  color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

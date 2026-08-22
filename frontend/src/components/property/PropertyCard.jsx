@@ -55,7 +55,7 @@ const PropertyCard = ({ property, onSaveToggle }) => {
             className="group block bg-white dark:bg-dark-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-border hover:border-primary/30"
         >
             {/* Image */}
-            <div className="relative h-52 overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                     src={property.images?.[0] || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600'}
                     alt={property.title}
@@ -65,12 +65,12 @@ const PropertyCard = ({ property, onSaveToggle }) => {
 
                 {/* Badges */}
                 <div className="absolute top-3 left-3 flex gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${property.status === 'For Sale' ? 'bg-emerald-500' : 'bg-blue-500'
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${property.status === 'For Sale' ? 'bg-secondary' : 'bg-primary'
                         }`}>
                         {property.status}
                     </span>
                     {property.isFeatured && (
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-amber-500">
+                        <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary-dark">
                             Featured
                         </span>
                     )}
@@ -98,13 +98,13 @@ const PropertyCard = ({ property, onSaveToggle }) => {
 
                 {/* Price */}
                 <div className="absolute bottom-3 left-3">
-                    <span className="text-xl font-bold text-white">{formatPrice(property.price)}</span>
+                    <span className="font-mono text-xl font-bold text-white">{formatPrice(property.price)}</span>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-1">
+            <div className="p-5">
+                <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors line-clamp-1">
                     {property.title}
                 </h3>
 

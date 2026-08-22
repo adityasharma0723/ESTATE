@@ -24,26 +24,26 @@ const AgentDashboard = () => {
     }, []);
 
     const cards = [
-        { icon: HiCollection, label: 'My Listings', value: stats.listings, to: '/agent/listings', color: 'from-primary to-secondary' },
-        { icon: HiEye, label: 'Total Views', value: stats.totalViews, to: '/agent/analytics', color: 'from-emerald-500 to-green-500' },
-        { icon: HiClipboardList, label: 'Inquiries', value: stats.inquiries, to: '/agent/analytics', color: 'from-amber-500 to-orange-500' },
-        { icon: HiPlus, label: 'Add Property', value: '+', to: '/agent/add-property', color: 'from-violet-500 to-purple-500' },
+        { icon: HiCollection, label: 'My Listings', value: stats.listings, to: '/agent/listings', color: 'bg-primary' },
+        { icon: HiEye, label: 'Total Views', value: stats.totalViews, to: '/agent/analytics', color: 'bg-secondary' },
+        { icon: HiClipboardList, label: 'Inquiries', value: stats.inquiries, to: '/agent/analytics', color: 'bg-primary-dark' },
+        { icon: HiPlus, label: 'Add Property', value: '+', to: '/agent/add-property', color: 'bg-error' },
     ];
 
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Agent Dashboard</h1>
+                <h1 className="font-serif text-2xl font-bold text-gray-900 dark:text-white">Agent Dashboard</h1>
                 <p className="text-gray-500 dark:text-dark-text mt-1">Welcome back, {user?.name} 🏡</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {cards.map((card) => (
                     <Link key={card.label} to={card.to}
                         className="bg-white dark:bg-dark-card rounded-2xl border border-gray-100 dark:border-dark-border p-6 hover:shadow-lg transition-all group">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${card.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <div className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                             <card.icon className="w-6 h-6 text-white" />
                         </div>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">{card.value}</p>
+                        <p className="font-mono text-2xl font-bold text-gray-900 dark:text-white">{card.value}</p>
                         <p className="text-sm text-gray-500 dark:text-dark-text mt-1">{card.label}</p>
                     </Link>
                 ))}

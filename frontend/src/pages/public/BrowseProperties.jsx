@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProperties, setFilters, resetFilters, addPropertyRealTime, updatePropertyRealTime, removePropertyRealTime } from '../../store/slices/propertySlice';
@@ -11,6 +11,10 @@ const BrowseProperties = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { properties, pagination, loading, filters } = useSelector((state) => state.properties);
     const [showFilters, setShowFilters] = useState(false);
+    // Local state for text inputs (city & search) to allow debouncing
+    const [localCity, setLocalCity] = useState('');
+    const [localSearch, setLocalSearch] = useState('');
+    const debounceRef = useRef(null);
 
     // Sync URL params to filters on mount
     useEffect(() => {
@@ -20,6 +24,9 @@ const BrowseProperties = () => {
         }
         if (Object.keys(params).length > 0) {
             dispatch(setFilters(params));
+            // Sync local text state too
+            if (params.city) setLocalCity(params.city);
+            if (params.search) setLocalSearch(params.search);
         }
     }, []);
 
@@ -42,9 +49,20 @@ const BrowseProperties = () => {
         setSearchParams(params);
     };
 
+    // Debounced handler for city and search text inputs
+    const handleTextInputChange = (key, value, setter) => {
+        setter(value);
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => {
+            handleFilterChange(key, value.trim());
+        }, 500);
+    };
+
     const handleReset = () => {
         dispatch(resetFilters());
         setSearchParams({});
+        setLocalCity('');
+        setLocalSearch('');
     };
 
     const activeFilterCount = Object.values(filters).filter(v => v && v !== 'newest').length;
@@ -174,8 +192,8 @@ const BrowseProperties = () => {
                                     <HiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                     <input
                                         type="text" placeholder="Keywords..."
-                                        value={filters.search}
-                                        onChange={(e) => handleFilterChange('search', e.target.value)}
+                                        value={localSearch}
+                                        onChange={(e) => handleTextInputChange('search', e.target.value, setLocalSearch)}
                                         className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-dark border border-gray-200 dark:border-dark-border rounded-xl text-sm focus:outline-none focus:border-primary transition-colors"
                                     />
                                 </div>
@@ -217,8 +235,8 @@ const BrowseProperties = () => {
                             <div className="mb-5">
                                 <label className="block text-xs font-medium text-gray-500 dark:text-dark-text mb-1.5 uppercase tracking-wider">City</label>
                                 <input type="text" placeholder="Enter city"
-                                    value={filters.city}
-                                    onChange={(e) => handleFilterChange('city', e.target.value)}
+                                    value={localCity}
+                                    onChange={(e) => handleTextInputChange('city', e.target.value, setLocalCity)}
                                     className="w-full py-2.5 px-3 bg-gray-50 dark:bg-dark border border-gray-200 dark:border-dark-border rounded-xl text-sm focus:outline-none focus:border-primary transition-colors" />
                             </div>
 

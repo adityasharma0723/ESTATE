@@ -28,7 +28,7 @@ const Hero = () => {
                     alt="Modern luxury home"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/75 to-white/40 dark:from-dark/90 dark:via-dark/70 dark:to-dark/40" />
+                <div className="absolute inset-0 bg-white/70 dark:bg-dark/80" />
             </div>
 
             {/* Floating shapes */}
@@ -43,9 +43,9 @@ const Hero = () => {
                         <span className="text-sm text-gray-700 dark:text-white/80">Over 10,000+ properties listed</span>
                     </div>
 
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight animate-slide-up">
+                    <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight animate-slide-up">
                         Find Your{' '}
-                        <span className="bg-gradient-to-r from-primary-light to-secondary bg-clip-text text-transparent">
+                        <span className="text-primary">
                             Dream Home
                         </span>
                         , Effortlessly
@@ -125,7 +125,7 @@ const Hero = () => {
                             { value: '500+', label: 'Agents' },
                         ].map((stat) => (
                             <div key={stat.label} className="text-center sm:text-left">
-                                <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                                <p className="font-mono text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
                                 <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">{stat.label}</p>
                             </div>
                         ))}

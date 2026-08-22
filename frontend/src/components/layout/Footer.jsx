@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
     return (
@@ -11,23 +10,17 @@ const Footer = () => {
                     {/* Brand */}
                     <div>
                         <Link to="/" className="flex items-center space-x-2 mb-4">
-                            <div className="w-9 h-9 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                                <span className="text-white font-bold text-lg">E</span>
+                            <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
+                                <span className="font-serif text-white font-bold text-lg">E</span>
                             </div>
-                            <span className="text-xl font-bold text-white">
+                            <span className="font-serif text-xl font-bold text-white">
                                 Estate<span className="text-primary-light">X</span>
                             </span>
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Your trusted partner in finding the perfect property. Premium listings, verified agents, and seamless experiences.
                         </p>
-                        <div className="flex space-x-3 mt-6">
-                            {[FaFacebook, FaTwitter, FaInstagram, FaLinkedin].map((Icon, i) => (
-                                <a key={i} href="#" className="w-9 h-9 rounded-lg bg-gray-800 dark:bg-dark-card flex items-center justify-center text-gray-400 hover:text-primary hover:bg-gray-700 transition-colors">
-                                    <Icon className="w-4 h-4" />
-                                </a>
-                            ))}
-                        </div>
+
                     </div>
 
                     {/* Quick Links */}
@@ -89,10 +82,6 @@ const Footer = () => {
             <div className="border-t border-gray-800 dark:border-dark-border">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
                     <p>© {new Date().getFullYear()} EstateX. All rights reserved.</p>
-                    <div className="flex space-x-6 mt-2 sm:mt-0">
-                        <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-                    </div>
                 </div>
             </div>
         </footer>

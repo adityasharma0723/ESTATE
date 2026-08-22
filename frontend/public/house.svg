@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="roofGrad" x1="0" y1="0" x2="64" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="wallGrad" x1="12" y1="28" x2="52" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="doorGrad" x1="26" y1="40" x2="38" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <!-- Roof -->
+  <path d="M32 4 L4 30 L12 30 L12 58 L52 58 L52 30 L60 30 Z" fill="url(#roofGrad)" />
+  <!-- Wall -->
+  <rect x="12" y="30" width="40" height="28" rx="2" fill="url(#wallGrad)" />
+  <!-- Door -->
+  <rect x="26" y="38" width="12" height="20" rx="2" fill="url(#doorGrad)" />
+  <!-- Door knob -->
+  <circle cx="35" cy="49" r="1.5" fill="#92400e" />
+  <!-- Left window -->
+  <rect x="16" y="34" width="7" height="7" rx="1" fill="#c4b5fd" opacity="0.9" />
+  <line x1="19.5" y1="34" x2="19.5" y2="41" stroke="#6366f1" stroke-width="0.7" />
+  <line x1="16" y1="37.5" x2="23" y2="37.5" stroke="#6366f1" stroke-width="0.7" />
+  <!-- Right window -->
+  <rect x="41" y="34" width="7" height="7" rx="1" fill="#c4b5fd" opacity="0.9" />
+  <line x1="44.5" y1="34" x2="44.5" y2="41" stroke="#6366f1" stroke-width="0.7" />
+  <line x1="41" y1="37.5" x2="48" y2="37.5" stroke="#6366f1" stroke-width="0.7" />
+  <!-- Chimney -->
+  <rect x="42" y="10" width="6" height="16" rx="1" fill="#4f46e5" />
+</svg>
